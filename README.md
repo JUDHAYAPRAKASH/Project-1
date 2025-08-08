@@ -31,9 +31,9 @@ User → CloudFront → S3 (HTML/JS) → API Gateway → Lambda → DynamoDB
 - Add JavaScript that sends a POST request to save contact details and a GET request to retrieve messages.
 - Place a screenshot or wireframe showing the form and UI interaction.
 
-![Step 1 — Frontend mockup](assets/images/step1-frontend.png)
+![Step 1 — Frontend mockup](FONTEND.png)
 
-Suggested image: `assets/images/step1-frontend.png` — screenshot of the form UI or a wireframe showing form fields and buttons.
+screenshot of the form UI or a wireframe showing form fields and buttons.
 
 ---
 
@@ -71,7 +71,7 @@ the Lambda console with the function list or the function configuration page.
   - GET /contacts → GET Lambda
 - Enable CORS for your frontend origin (or `*` for testing), deploy the API, and copy the invoke URL(s).
 
-![Step 4 — API Gateway routes](API GATEWAY - POST,GET.png)
+![Step 4 — API Gateway routes](APIGATEWAYPOST,GET.png)
 
  API Gateway routes or the deployed API overview with the invoke URL visible.
 
@@ -83,7 +83,7 @@ the Lambda console with the function list or the function configuration page.
 - Upload the frontend files (index.html, script.js, and any assets).
 - Configure public read (or use CloudFront + OAI for a private origin).
 
-![Step 5 — S3 static website hosting](S3-BUCKET-UPLOAD.png)
+![Step 5 — S3 static website hosting](S3BUCKETUPLOAD.png)
 
 show the S3 bucket static website hosting settings and the uploaded files.
 
