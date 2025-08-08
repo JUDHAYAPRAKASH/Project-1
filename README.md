@@ -55,8 +55,8 @@ Suggested image: `assets/images/step2-dynamodb.png` — capture the "Create tabl
   - GET Lambda — retrieves saved contact entries from DynamoDB.
 - Assign the Lambda execution role the necessary DynamoDB permissions and test using sample payloads.
 
-![Step 3 — Lambda functions](GET LAMBDA FUNCTION.png)
-![Step 3 — Lambda functions](POST LAMBDA FUNCTION.png)
+![Step 3 — Lambda functions](GETLAMBDAFUNCTION.png)
+![Step 3 — Lambda functions](POSTLAMBDAFUNCTION.png)
 
 the Lambda console with the function list or the function configuration page.
 
