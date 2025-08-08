@@ -3,81 +3,138 @@
   <head>
     <title>Udhaya Contact Book</title>
     <style>
-        body {
-          font-family: Arial, sans-serif; /* You can change the font to your preference */
-        }
-      
+      /* Page Background */
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #89f7fe, #66a6ff);
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Container Styling */
+      .container {
+        width: 50%;
+        max-width: 600px;
+        margin: 50px auto;
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        animation: fadeIn 0.8s ease-in-out;
+      }
+
+      /* Title */
+      h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      /* Labels */
+      label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+        color: #444;
+      }
+
+      /* Inputs & Textarea */
+      input[type="text"],
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-sizing: border-box;
+        transition: all 0.2s ease-in-out;
+      }
+
+      textarea {
+        height: 100px;
+        resize: none;
+      }
+
+      /* Focus Effects */
+      input[type="text"]:focus,
+      textarea:focus {
+        border-color: #66a6ff;
+        box-shadow: 0 0 5px rgba(102, 166, 255, 0.5);
+        outline: none;
+      }
+
+      /* Buttons */
+      input[type="submit"] {
+        background: linear-gradient(135deg, #4CAF50, #45a049);
+        color: white;
+        cursor: pointer;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: transform 0.2s ease, background 0.3s ease;
+      }
+
+      input[type="submit"]:hover {
+        transform: scale(1.03);
+        background: linear-gradient(135deg, #45a049, #4CAF50);
+      }
+
+      /* Success Message */
+      #messageSaved {
+        color: #2ecc71;
+        margin-top: 10px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      /* Message List */
+      #showMessages {
+        margin-top: 20px;
+      }
+
+      /* Message Card */
+      .messageCard {
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        animation: slideUp 0.4s ease-in-out;
+      }
+
+      .messageCard .messageContent {
+        font-style: italic;
+        color: #333;
+      }
+
+      .messageCard .messageDetail {
+        font-size: 0.9em;
+        color: #777;
+        margin-top: 5px;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes slideUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
         .container {
-          width: 50%;
-          margin: 0 auto;
+          width: 90%;
+          margin: 20px auto;
         }
-      
-        h1 {
-          text-align: center;
-        }
-      
-        label {
-          display: block;
-          margin-top: 10px;
-        }
-      
-        input[type="text"],
-        textarea,
-        input[type="submit"] {
-          width: 100%;
-          padding: 10px;
-          margin-top: 5px;
-          margin-bottom: 10px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          box-sizing: border-box;
-        }
-      
-        textarea {
-          height: 100px; /* You can adjust the height as needed */
-        }
-      
-        input[type="submit"] {
-          background-color: #4CAF50;
-          color: white;
-          cursor: pointer;
-        }
-      
-        input[type="submit"]:hover {
-          background-color: #45a049;
-        }
-      
-        #messageSaved {
-          color: green;
-          margin-top: 10px;
-        }
-      
-        /* Message card styles */
-        #showMessages {
-          margin-top: 20px;
-        }
-      
-        .messageCard {
-          border: 1px solid #cccccc;
-          border-radius: 5px;
-          padding: 10px;
-          margin-bottom: 10px;
-          background-color: #f9f9f9;
-        }
-      
-        .messageCard .messageContent {
-          font-style: italic;
-          color: #333333;
-        }
-      
-        .messageCard .messageDetail {
-          font-size: 0.9em;
-          color: #666666;
-          margin-top: 5px;
-        }
-      </style>
-      
+      }
+    </style>
   </head>
+
   <body>
     <div class="container">
       <h1>Udhaya Contact Book</h1>
@@ -90,17 +147,14 @@
       <label for="lname">Last Name:</label>
       <input type="text" name="lastname" id="lname" />
 
-
       <input type="submit" id="savemessage" value="Save Message" />
       <p id="messageSaved"></p>
 
       <input type="submit" id="getmessages" value="View all Messages" />
       <div id="showMessages"></div>
     </div>
+
     <script src="scripts.js"></script>
-    <script
-      type="text/javascript"
-      src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"
-    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
   </body>
 </html>
