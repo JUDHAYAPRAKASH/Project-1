@@ -39,13 +39,13 @@ screenshot of the form UI or a wireframe showing form fields and buttons.
 
 ### Step 2: Create DynamoDB Table
 - Open the AWS Console → DynamoDB → Create table.
-- Table name: `ContactBook`
-- Primary key: `id` (String)
+- Table name: `Serverless`
+- Primary key: `msg` (String)
 - Use on-demand capacity mode for simplicity.
 
 ![Step 2 — DynamoDB Create Table](DynamoDB-Table.png)
 
-Suggested image: `assets/images/step2-dynamodb.png` — capture the "Create table" page showing the table name and primary key.
+capture the "Create table" page showing the table name and primary key.
 
 ---
 
@@ -54,10 +54,13 @@ Suggested image: `assets/images/step2-dynamodb.png` — capture the "Create tabl
   - POST Lambda — receives form data and stores it in DynamoDB with a unique ID.
   - GET Lambda — retrieves saved contact entries from DynamoDB.
 - Assign the Lambda execution role the necessary DynamoDB permissions and test using sample payloads.
-- 
-GET Lambda 
+  
+-GET Lambda 
+
 ![Step 3 — Lambda functions](GETLAMBDAFUNCTION.png)
-POST Lambda
+
+-POST Lambda
+
 ![Step 3 — Lambda functions](POSTLAMBDAFUNCTION.png)
 
 the Lambda console with the function list or the function configuration page.
@@ -81,7 +84,7 @@ the Lambda console with the function list or the function configuration page.
 - Create an S3 bucket (globally unique name).
 - Enable static website hosting in the bucket properties.
 - Upload the frontend files (index.html, script.js, and any assets).
-- Configure public read (or use CloudFront + OAI for a private origin).
+- Configure public read (or use CloudFront).
 
 ![Step 5 — S3 static website hosting](S3BUCKETUPLOAD.png)
 
@@ -97,7 +100,7 @@ show the S3 bucket static website hosting settings and the uploaded files.
 
 ![Step 6 — CloudFront distribution](Cloudfont-S3-Link.png)
 
-Suggested image: `assets/images/step6-cloudfront.png` — capture CloudFront distribution settings and the distribution domain name.
+capture CloudFront distribution settings and the distribution domain name.
 
 ---
 
@@ -108,7 +111,7 @@ Suggested image: `assets/images/step6-cloudfront.png` — capture CloudFront dis
 
 ![Step 7 — Route 53 record](Route53.png)
 
-Suggested image: `assets/images/step7-route53.png` — show the Hosted Zone and the Alias record pointing to CloudFront.
+show the Hosted Zone and the Alias record pointing to CloudFront.
 
 ---
 
@@ -117,27 +120,11 @@ Suggested image: `assets/images/step7-route53.png` — show the Hosted Zone and 
 - Submit the contact form and confirm the entry appears in the DynamoDB table (or check Lambda logs).
 - Click "View Messages" in the frontend and confirm GET returns stored messages.
 
-![Testing and verification](assets/images/testing.png)
 
-Suggested image: `assets/images/testing.png` — screenshot of the live site with a sample saved message and a DynamoDB console item.
 
 ---
 
-## Where to put images
-Create an `assets/images/` directory in the repository and add these files:
-- `architecture.png`
-- `step1-frontend.png`
-- `step2-dynamodb.png`
-- `step3-lambda.png`
-- `step4-apigateway.png`
-- `step5-s3.png`
-- `step6-cloudfront.png`
-- `step7-route53.png`
-- `testing.png`
 
-Commit those images to your repo so the README renders them in place.
-
----
 
 ## License
-MIT License
+Open Source to use
