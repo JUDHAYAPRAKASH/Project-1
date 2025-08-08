@@ -44,17 +44,43 @@ User → CloudFront → S3 HTML/JS → API Gateway → Lambda → DynamoDB
    - Example:
 
      ```javascript
-     // POST request
-     fetch('<API_GATEWAY_POST_URL>', {
-       method: 'POST',
-       headers: { 'Content-Type': 'application/json' },
-       body: JSON.stringify({ name, email, message })
-     });
-
-     // GET request
-     fetch('<API_GATEWAY_GET_URL>')
-       .then(res => res.json())
-       .then(data => console.log(data));
+    $.ajax({
+      url: API_ENDPOINT,
+      type: "POST",
+      data: JSON.stringify(inputData),
+      contentType: "application/json; charset=utf-8",
+      success: function () {
+        document.getElementById("messageSaved").innerHTML = "Message Saved!";
+        $("#msg").val("");
+        $("#fname").val("");
+        $("#lname").val("");
+      },
+      error: function () {
+        alert("Error saving message.");
+      },
+    });
+  };
+  document.getElementById("getmessages").onclick = function () {
+    $.ajax({
+      url: API_ENDPOINT,
+      type: "GET",
+      contentType: "application/json; charset=utf-8",
+      success: function (response) {
+        $("#showMessages").empty();
+        $.each(response, function (i, data) {
+          var messageCardHtml =
+            '<div class="messageCard">' +
+            '<div class="messageContent">' + data["msg"] + '</div>' +
+            '<div class="messageDetail">From: ' + data["firstName"] + ' ' + data["lastName"] + ' on ' + data["date"] + '</div>' +
+            '</div>';
+          $("#showMessages").append(messageCardHtml);
+        });
+      },
+      error: function () {
+        alert("Error fetching messages.");
+      },
+    });
+  };
      ```
 
 ---
