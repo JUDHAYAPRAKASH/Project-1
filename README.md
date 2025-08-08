@@ -54,8 +54,10 @@ Suggested image: `assets/images/step2-dynamodb.png` — capture the "Create tabl
   - POST Lambda — receives form data and stores it in DynamoDB with a unique ID.
   - GET Lambda — retrieves saved contact entries from DynamoDB.
 - Assign the Lambda execution role the necessary DynamoDB permissions and test using sample payloads.
-
+- 
+GET Lambda 
 ![Step 3 — Lambda functions](GETLAMBDAFUNCTION.png)
+POST Lambda
 ![Step 3 — Lambda functions](POSTLAMBDAFUNCTION.png)
 
 the Lambda console with the function list or the function configuration page.
