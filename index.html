@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Udhaya Contact Book</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif; /* You can change the font to your preference */
+        }
+      
+        .container {
+          width: 50%;
+          margin: 0 auto;
+        }
+      
+        h1 {
+          text-align: center;
+        }
+      
+        label {
+          display: block;
+          margin-top: 10px;
+        }
+      
+        input[type="text"],
+        textarea,
+        input[type="submit"] {
+          width: 100%;
+          padding: 10px;
+          margin-top: 5px;
+          margin-bottom: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+      
+        textarea {
+          height: 100px; /* You can adjust the height as needed */
+        }
+      
+        input[type="submit"] {
+          background-color: #4CAF50;
+          color: white;
+          cursor: pointer;
+        }
+      
+        input[type="submit"]:hover {
+          background-color: #45a049;
+        }
+      
+        #messageSaved {
+          color: green;
+          margin-top: 10px;
+        }
+      
+        /* Message card styles */
+        #showMessages {
+          margin-top: 20px;
+        }
+      
+        .messageCard {
+          border: 1px solid #cccccc;
+          border-radius: 5px;
+          padding: 10px;
+          margin-bottom: 10px;
+          background-color: #f9f9f9;
+        }
+      
+        .messageCard .messageContent {
+          font-style: italic;
+          color: #333333;
+        }
+      
+        .messageCard .messageDetail {
+          font-size: 0.9em;
+          color: #666666;
+          margin-top: 5px;
+        }
+      </style>
+      
+  </head>
+  <body>
+    <div class="container">
+      <h1>Udhaya Contact Book</h1>
+      <label for="msg">Message:</label>
+      <textarea name="message" id="msg"></textarea>
+
+      <label for="fname">First Name:</label>
+      <input type="text" name="firstname" id="fname" />
+
+      <label for="lname">Last Name:</label>
+      <input type="text" name="lastname" id="lname" />
+
+
+      <input type="submit" id="savemessage" value="Save Message" />
+      <p id="messageSaved"></p>
+
+      <input type="submit" id="getmessages" value="View all Messages" />
+      <div id="showMessages"></div>
+    </div>
+    <script src="scripts.js"></script>
+    <script
+      type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"
+    ></script>
+  </body>
+</html>
