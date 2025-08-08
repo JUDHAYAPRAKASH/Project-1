@@ -1,151 +1,89 @@
 # AWS Contact Book — Serverless Project
 
-This is a **serverless contact book application** built using **AWS Lambda**, **API Gateway**, **DynamoDB**, **S3**, and **CloudFront**.  
-It allows users to **submit contact details** and **view saved messages** via a web form.
+This project is a serverless contact book application using AWS Lambda, API Gateway, DynamoDB, S3, and CloudFront.  
+It allows users to submit contact details and view saved messages.
 
 ---
 
-## 📌 Project Architecture
+## Project Architecture
 
-User → CloudFront → S3 HTML/JS → API Gateway → Lambda → DynamoDB
-
+User → CloudFront → S3 (HTML/JS) → API Gateway → Lambda → DynamoDB
 
 ---
 
-## 🚀 Features
+## Features
 
-- Serverless — no traditional backend server.
+- Fully serverless design, no traditional backend server.
 - Save contact details (Name, Email, Message) in DynamoDB.
 - View all saved messages.
-- Secure with IAM permissions.
+- IAM-based security.
 - Deployed globally via CloudFront.
 
 ---
 
-## 🛠 Step-by-Step Setup
+## Step-by-Step Setup
 
-### **1️⃣ Frontend (HTML + JS)**
+### Step 1: Prepare the Frontend
+- Create an HTML page with a form containing fields for name, email, and message.
+- Add JavaScript to send a POST request to save contact details.
+- Add JavaScript to send a GET request to retrieve and display saved messages.
 
-1. Create `index.html` with a contact form:
-   ```html
-   <!DOCTYPE html>
-   <html>
-   <head>
-       <title>Contact Book</title>
-   </head>
-   <body>
-       <h1>Contact Book</h1>
-       <input id="name" placeholder="Name">
-       <input id="email" placeholder="Email">
-       <textarea id="message" placeholder="Message"></textarea>
-       <button onclick="saveContact()">Save</button>
-       <button onclick="viewContacts()">View Messages</button>
-       <pre id="output"></pre>
-       <script src="script.js"></script>
-   </body>
-   </html>
-const POST_URL = "<API_GATEWAY_POST_URL>";
-const GET_URL = "<API_GATEWAY_GET_URL>";
+---
 
-async function saveContact() {
-    const data = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        message: document.getElementById("message").value
-    };
-    const res = await fetch(POST_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    });
-    document.getElementById("output").innerText = await res.text();
-}
+### Step 2: Create DynamoDB Table
+- Go to AWS DynamoDB and create a new table.
+- Table name: `ContactBook`.
+- Primary key: `id` (String).
+- Use on-demand capacity mode.
 
-async function viewContacts() {
-    const res = await fetch(GET_URL);
-    const data = await res.json();
-    document.getElementById("output").innerText = JSON.stringify(data, null, 2);
-}
-2️⃣ DynamoDB Table
-Open DynamoDB → Create table:
+---
 
-Name: ContactBook
+### Step 3: Create Lambda Functions
+- Create two Lambda functions:
+  1. **POST Lambda** — Receives form data and stores it in DynamoDB with a unique ID.
+  2. **GET Lambda** — Fetches all saved contact entries from DynamoDB.
+- Assign the Lambda execution role the necessary DynamoDB permissions.
 
-Primary key: id (String)
+---
 
-Keep on-demand capacity.
+### Step 4: Set Up API Gateway
+- Create a new HTTP API.
+- Create two routes:
+  - POST `/contacts` linked to the POST Lambda.
+  - GET `/contacts` linked to the GET Lambda.
+- Enable CORS for all origins and methods.
+- Deploy the API and copy the endpoint URLs.
 
-Save the table name & region.
+---
 
-3️⃣ Lambda Functions
-You’ll create two Lambda functions.
+### Step 5: Deploy Frontend to S3
+- Create an S3 bucket with a globally unique name.
+- Enable static website hosting in the bucket properties.
+- Upload the HTML and JavaScript files.
+- Configure the bucket policy to allow public read access.
 
-POST Lambda (Save Contact)
+---
 
-const { DynamoDBClient, PutItemCommand } = require("@aws-sdk/client-dynamodb");
-const { v4: uuidv4 } = require("uuid");
-const db = new DynamoDBClient({ region: process.env.AWS_REGION });
+### Step 6: Set Up CloudFront
+- Create a CloudFront distribution with the S3 bucket as the origin.
+- Set the default root object to `index.html`.
+- Copy the CloudFront distribution domain name for global access.
 
-exports.handler = async (event) => {
-    const body = JSON.parse(event.body);
-    const params = {
-        TableName: "ContactBook",
-        Item: {
-            id: { S: uuidv4() },
-            name: { S: body.name },
-            email: { S: body.email },
-            message: { S: body.message }
-        }
-    };
-    await db.send(new PutItemCommand(params));
-    return { statusCode: 200, body: "Contact saved successfully!" };
-};
+---
 
-GET Lambda (Fetch Contacts)
+### Step 7: (Optional) Configure a Custom Domain with Route 53
+- Register or use an existing domain in Route 53.
+- Create an Alias A record pointing to the CloudFront distribution.
+- Wait for DNS propagation.
 
-const { DynamoDBClient, ScanCommand } = require("@aws-sdk/client-dynamodb");
-const db = new DynamoDBClient({ region: process.env.AWS_REGION });
+---
 
-exports.handler = async () => {
-    const data = await db.send(new ScanCommand({ TableName: "ContactBook" }));
-    return {
-        statusCode: 200,
-        body: JSON.stringify(data.Items)
-    };
-};
+## Testing
+- Open the CloudFront URL (or custom domain) in a browser.
+- Submit the contact form and verify the data is saved in DynamoDB.
+- Retrieve and view saved messages.
 
-4️⃣ API Gateway
-Create API → HTTP API.
+---
 
-Add routes:
-
-POST /contacts → POST Lambda
-
-GET /contacts → GET Lambda
-
-Enable CORS (Origin: *, Methods: GET, POST).
-
-Deploy API → Copy Invoke URLs → Paste into script.js.
-
-5️⃣ S3 Frontend Hosting
-Create S3 bucket (unique name).
-
-Enable Static website hosting.
-
-Upload index.html & script.js.
-
-Make files public with a bucket policy.
-
-6️⃣ CloudFront Distribution
-Create CloudFront → Origin: S3 bucket.
-
-Default root: index.html.
-
-Copy CloudFront URL → Access app globally.
-
-7️⃣ (Optional) Route 53 Custom Domain
-Register or use existing domain.
-
-Create Alias A record → Points to CloudFront.
-
-Wait for DNS to propagate.
+## License
+MIT License
