@@ -10,7 +10,7 @@ User → CloudFront → S3 (HTML/JS) → API Gateway → Lambda → DynamoDB
 
 ![Architecture diagram](architecture.jpg)
 
-Suggested image: `assets/images/architecture.png` — a simple diagram showing CloudFront → S3 → API Gateway → Lambda → DynamoDB.
+Suggested image: `architecture.png` — a simple diagram showing CloudFront → S3 → API Gateway → Lambda → DynamoDB.
 
 ---
 
