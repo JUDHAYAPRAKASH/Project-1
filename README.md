@@ -10,7 +10,7 @@ User → CloudFront → S3 (HTML/JS) → API Gateway → Lambda → DynamoDB
 
 ![Architecture diagram](architecture.png)
 
-Suggested image: `architecture.png` — a simple diagram showing CloudFront → S3 → API Gateway → Lambda → DynamoDB.
+ CloudFront → S3 → API Gateway → Lambda → DynamoDB.
 
 ---
 
@@ -43,7 +43,7 @@ Suggested image: `assets/images/step1-frontend.png` — screenshot of the form U
 - Primary key: `id` (String)
 - Use on-demand capacity mode for simplicity.
 
-![Step 2 — DynamoDB Create Table](assets/images/step2-dynamodb.png)
+![Step 2 — DynamoDB Create Table](DynamoDB-Table.png)
 
 Suggested image: `assets/images/step2-dynamodb.png` — capture the "Create table" page showing the table name and primary key.
 
@@ -55,9 +55,10 @@ Suggested image: `assets/images/step2-dynamodb.png` — capture the "Create tabl
   - GET Lambda — retrieves saved contact entries from DynamoDB.
 - Assign the Lambda execution role the necessary DynamoDB permissions and test using sample payloads.
 
-![Step 3 — Lambda functions](assets/images/step3-lambda.png)
+![Step 3 — Lambda functions](GET LAMBDA FUNCTION.png)
+![Step 3 — Lambda functions](POST LAMBDA FUNCTION.png)
 
-Suggested image: `assets/images/step3-lambda.png` — show the Lambda console with the function list or the function configuration page.
+the Lambda console with the function list or the function configuration page.
 
 ---
 
@@ -68,9 +69,9 @@ Suggested image: `assets/images/step3-lambda.png` — show the Lambda console wi
   - GET /contacts → GET Lambda
 - Enable CORS for your frontend origin (or `*` for testing), deploy the API, and copy the invoke URL(s).
 
-![Step 4 — API Gateway routes](assets/images/step4-apigateway.png)
+![Step 4 — API Gateway routes](API GATEWAY - POST,GET.png)
 
-Suggested image: `assets/images/step4-apigateway.png` — screenshot of API Gateway routes or the deployed API overview with the invoke URL visible.
+ API Gateway routes or the deployed API overview with the invoke URL visible.
 
 ---
 
@@ -80,9 +81,9 @@ Suggested image: `assets/images/step4-apigateway.png` — screenshot of API Gate
 - Upload the frontend files (index.html, script.js, and any assets).
 - Configure public read (or use CloudFront + OAI for a private origin).
 
-![Step 5 — S3 static website hosting](assets/images/step5-s3.png)
+![Step 5 — S3 static website hosting](S3-BUCKET-UPLOAD.png)
 
-Suggested image: `assets/images/step5-s3.png` — show the S3 bucket static website hosting settings and the uploaded files.
+show the S3 bucket static website hosting settings and the uploaded files.
 
 ---
 
@@ -92,7 +93,7 @@ Suggested image: `assets/images/step5-s3.png` — show the S3 bucket static webs
 - Configure caching, HTTPS, and (optionally) an origin access identity.
 - Use the CloudFront domain name as the public URL for the app (or map a custom domain).
 
-![Step 6 — CloudFront distribution](assets/images/step6-cloudfront.png)
+![Step 6 — CloudFront distribution](Cloudfont-S3-Link.png)
 
 Suggested image: `assets/images/step6-cloudfront.png` — capture CloudFront distribution settings and the distribution domain name.
 
@@ -103,7 +104,7 @@ Suggested image: `assets/images/step6-cloudfront.png` — capture CloudFront dis
 - Create an Alias record pointing to the CloudFront distribution.
 - Request/attach an ACM certificate (us-east-1 for CloudFront) and enable HTTPS.
 
-![Step 7 — Route 53 record](assets/images/step7-route53.png)
+![Step 7 — Route 53 record](Route53.png)
 
 Suggested image: `assets/images/step7-route53.png` — show the Hosted Zone and the Alias record pointing to CloudFront.
 
