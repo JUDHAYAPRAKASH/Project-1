@@ -8,7 +8,7 @@ This project is a serverless contact book application using AWS Lambda, API Gate
 
 User → CloudFront → S3 (HTML/JS) → API Gateway → Lambda → DynamoDB
 
-![Architecture diagram](architecture.jpg)
+![Architecture diagram](architecture.png)
 
 Suggested image: `architecture.png` — a simple diagram showing CloudFront → S3 → API Gateway → Lambda → DynamoDB.
 
